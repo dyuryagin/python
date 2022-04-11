@@ -24,8 +24,8 @@ screen.colormode(255)
 tim = Turtle()
 tim.speed("fastest")
 tim.penup()
-tim.shape("classic")
 tim.setposition(15, 15)
+tim.hideturtle()
 
 
 for step in range(15, 500, 50):
