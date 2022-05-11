@@ -2,10 +2,13 @@ from tkinter import *
 from tkinter import messagebox
 import random
 import pyperclip
+import json
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 def generate_password():
-    letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+    letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
+               'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
+               'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
     numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
     symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
 
@@ -34,20 +37,16 @@ def generate_password():
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 def save():
-
     if not entry_website.get() or not entry_password:
         messagebox.showwarning(message="Fill out all the fields")
     else:
-        is_ok = messagebox.askokcancel(title=entry_website.get(), message=f"Email: {entry_email.get()}, "
-                                                                          f"password: {entry_password.get()}. Is it ok?")
-        if is_ok:
-            file = open("data.txt", "a")
-            file.write(f"{entry_website.get()} | {entry_email.get()} | {entry_password.get()}\n")
-            file.close()
-            entry_website.delete(0, END)
-            entry_email.delete(0, END)
-            entry_password.delete(0, END)
-            entry_website.focus()
+        file = open("data.json ", "w")
+        json.dump()
+        file.close()
+        entry_website.delete(0, END)
+        entry_email.delete(0, END)
+        entry_password.delete(0, END)
+        entry_website.focus()
 
 
 # ---------------------------- UI SETUP ------------------------------- #
@@ -62,7 +61,6 @@ canvas.grid(row=0, column=1)
 
 lbl_website = Label(text="Website:")
 lbl_website.grid(row=1, column=0)
-
 
 lbl_email = Label(text="Email/Username:")
 lbl_email.grid(row=2, column=0)
@@ -85,8 +83,5 @@ btn_generate.grid(row=3, column=2)
 
 btn_add = Button(text="Add", width=36, command=save)
 btn_add.grid(row=4, column=1, columnspan=2)
-
-
-
 
 window.mainloop()
